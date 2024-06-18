@@ -35,24 +35,24 @@ class GeneratePlaces extends Command
         $provinces = $this->csvToArray($file, ',', 'province');
         Province::insert($provinces);
 
-        // Regency::truncate();
-        // $file = public_path('csv/regencies.csv');
-        // $regencies = $this->csvToArray($file, ',', 'regency');
-        // Regency::insert($regencies);
+        Regency::truncate();
+        $file = public_path('csv/regencies.csv');
+        $regencies = $this->csvToArray($file, ',', 'regency');
+        Regency::insert($regencies);
 
-        // District::truncate();
-        // $file = public_path('csv/districts.csv');
-        // $districts = $this->csvToArray($file, ',', 'district');
-        // District::insert($districts);
+        District::truncate();
+        $file = public_path('csv/districts.csv');
+        $districts = $this->csvToArray($file, ',', 'district');
+        District::insert($districts);
 
-        // Village::truncate();
-        // $file = public_path('csv/villages.csv');
-        // $villages = $this->csvToArray($file, ',', 'village');
-        // foreach(array_chunk($villages, 5000) as $chunks ) {
-        //     foreach ($chunks as $vil ) {
-        //         Village::insert($vil);
-        //     }
-        // }
+        Village::truncate();
+        $file = public_path('csv/villages.csv');
+        $villages = $this->csvToArray($file, ',', 'village');
+        foreach(array_chunk($villages, 5000) as $chunks ) {
+            foreach ($chunks as $vil ) {
+                Village::insert($vil);
+            }
+        }
     }
 
     public function csvToArray($filename = '', $delimiter = ',' , $type = '')
